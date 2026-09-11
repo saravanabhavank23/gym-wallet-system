@@ -1,0 +1,21 @@
+package com.gym.walletsystem.controller;
+
+import com.gym.walletsystem.dto.LoginRequest;
+import com.gym.walletsystem.dto.LoginResponse;
+import com.gym.walletsystem.service.AuthService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/auth")
+@RequiredArgsConstructor
+public class AuthController {
+
+    private final AuthService authService;
+
+    @PostMapping("/login")
+    public LoginResponse login(@Valid @RequestBody LoginRequest request) {
+        return authService.login(request);
+    }
+}
