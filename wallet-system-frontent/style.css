@@ -1,0 +1,297 @@
+:root {
+    --bg: #F1F3F0;
+    --surface: #FFFFFF;
+    --line: #DCE2DB;
+    --ink: #14181B;
+    --ink-soft: #565F5C;
+    --plate: #E2542B;
+    --plate-dark: #C2431F;
+    --steel: #2E5F73;
+    --spring: #3B8C54;
+    --error: #C0392B;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+
+h1, h2, .balance-display, .brand {
+    font-family: 'Oswald', 'Segoe UI', Arial, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+/* ---------- Login Page ---------- */
+
+.login-container {
+    max-width: 380px;
+    margin: 100px auto;
+    background: var(--surface);
+    padding: 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+
+.login-container h1 {
+    font-size: 26px;
+    margin-bottom: 4px;
+    text-align: left;
+    color: var(--ink);
+    border-bottom: 3px solid var(--plate);
+    padding-bottom: 14px;
+}
+
+form label {
+    display: block;
+    margin-top: 16px;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-soft);
+}
+
+form input, form select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    font-size: 14px;
+    font-family: inherit;
+    background: var(--bg);
+}
+
+form input:focus, form select:focus {
+    outline: none;
+    border-color: var(--plate);
+}
+
+button {
+    margin-top: 22px;
+    width: 100%;
+    padding: 11px;
+    background: var(--plate);
+    color: white;
+    border: none;
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: var(--plate-dark);
+}
+
+.error {
+    color: var(--error);
+    margin-top: 14px;
+    font-size: 13px;
+}
+
+/* ---------- Dashboard Layout ---------- */
+
+.dashboard {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.dashboard-header {
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 16px;
+}
+
+.dashboard-header h1 {
+    font-size: 24px;
+    color: var(--ink);
+}
+
+.dashboard-header h1 span {
+    color: var(--plate);
+}
+
+.logout-btn {
+    width: auto;
+    padding: 9px 18px;
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    margin: 0;
+}
+
+.logout-btn:hover {
+    background: var(--ink);
+    color: var(--bg);
+}
+
+.card {
+    background: var(--surface);
+    padding: 26px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+.card h2 {
+    font-size: 15px;
+    margin-bottom: 18px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 12px;
+}
+
+.balance-display {
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--spring);
+    line-height: 1;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+table th, table td {
+    text-align: left;
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--line);
+}
+
+table th {
+    font-weight: 600;
+    color: var(--ink-soft);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.inline-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.inline-form input {
+    flex: 1;
+    min-width: 200px;
+}
+
+.inline-form button {
+    width: auto;
+    margin-top: 0;
+    padding: 10px 18px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+}
+
+.product-card {
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--plate);
+    border-radius: 2px;
+    padding: 18px;
+    text-align: left;
+}
+
+.product-card h3 {
+    font-size: 15px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.product-card .price {
+    color: var(--steel);
+    font-weight: 700;
+    margin-bottom: 12px;
+    font-size: 18px;
+    font-family: 'Oswald', sans-serif;
+}
+
+.product-card button {
+    margin-top: 0;
+    padding: 8px;
+    font-size: 13px;
+}
+
+.msg {
+    font-size: 13px;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(20, 24, 27, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.modal-box {
+    background: var(--surface);
+    padding: 28px;
+    border-radius: 3px;
+    border-top: 4px solid var(--plate);
+    width: 300px;
+    text-align: center;
+}
+
+.modal-box h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.modal-box p {
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.modal-cancel, .modal-confirm {
+    margin-top: 0;
+    flex: 1;
+    padding: 10px;
+}
+
+.modal-cancel {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ink);
+}
+
+.modal-cancel:hover {
+    background: var(--bg);
+}
+
+.msg.success { color: var(--spring); }
+.msg.error { color: var(--error); }

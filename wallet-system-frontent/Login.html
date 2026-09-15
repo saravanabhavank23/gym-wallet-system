@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gym Wallet - Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Gym Wallet System</h1>
+        <form id="loginForm">
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+        <p id="errorMessage" class="error"></p>
+    </div>
+
+    <script src="config.js"></script>
+    <script>
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            window.location.reload();
+        }
+    });
+
+    const existingToken = localStorage.getItem('token');
+    const existingRole = localStorage.getItem('role');
+    if (existingToken && existingRole) {
+        window.location.replace(existingRole === 'ADMIN' ? 'Admin.html' : 'CustomerDashboard.html');
+    }
+
+    const form = document.getElementById('loginForm');
+    const errorMessage = document.getElementById('errorMessage');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errorMessage.textContent = '';
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                errorMessage.textContent = data.message || 'Login failed';
+                return;
+            }
+
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('role', data.role);
+            localStorage.setItem('name', data.name);
+
+            if (data.role === 'ADMIN') {
+                window.location.replace('Admin.html');
+            } else {
+                window.location.replace('CustomerDashboard.html');
+            }
+        } catch (err) {
+            errorMessage.textContent = 'Could not connect to server';
+        }
+    });
+</script>
+</body>
+</html>

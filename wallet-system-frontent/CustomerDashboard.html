@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <div class="dashboard-header">
+            <h1>Welcome, <span id="customerName"></span></h1>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+
+        <!-- Wallet Balance -->
+        <div class="card">
+            <h2>Wallet Balance</h2>
+            <div class="balance-display">Rs. <span id="walletBalance">0.00</span></div>
+        </div>
+
+        <!-- Products -->
+        <div class="card">
+            <h2>Available Products</h2>
+            <p id="purchaseMsg" class="msg"></p>
+            <div class="product-grid" id="productsGrid"></div>
+        </div>
+
+        <!-- Purchase History -->
+        <div class="card">
+            <h2>My Purchase History</h2>
+            <table>
+                <thead>
+                    <tr><th>Product</th><th>Price</th><th>Date</th></tr>
+                </thead>
+                <tbody id="purchaseHistoryBody"></tbody>
+            </table>
+        </div>
+
+        <!-- Purchase Confirmation Modal -->
+        <div id="confirmModal" class="modal-overlay" style="display:none;">
+            <div class="modal-box">
+                <h3 id="modalProductName"></h3>
+                <p id="modalProductPrice"></p>
+                <div class="modal-actions">
+                    <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+                    <button class="modal-confirm" onclick="confirmPurchase()">Confirm Purchase</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="Config.js"></script>
+    <script src="Customer.js"></script>
+</body>
+</html>
