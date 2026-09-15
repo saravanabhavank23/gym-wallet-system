@@ -65,6 +65,12 @@ public class AdminController {
         return "Product deleted";
     }
 
+    @PostMapping("/customers/{customerId}/purchase/{productId}")
+    public String purchaseForCustomer(@PathVariable Long customerId, @PathVariable Long productId) {
+        adminService.purchaseForCustomer(customerId, productId);
+        return "Purchase recorded successfully";
+    }
+
     @GetMapping("/products")
     public List<Product> getAllProducts() {
         return adminService.getAllProducts();

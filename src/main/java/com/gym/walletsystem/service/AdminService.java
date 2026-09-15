@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.gym.walletsystem.exception.DuplicateEmailException;
 import com.gym.walletsystem.exception.ResourceNotFoundException;
 import com.gym.walletsystem.dto.UserResponse;
+import com.gym.walletsystem.exception.InsufficientBalanceException;
+import com.gym.walletsystem.exception.ResourceNotFoundException;
 
 import java.util.List;
 
@@ -99,6 +101,31 @@ public class AdminService {
         product.setName(request.getName());
         product.setPrice(request.getPrice());
         return productRepository.save(product);
+    }
+
+    @Transactional
+    public void purchaseForCustomer(Long customerId, Long productId) {
+        User customer = userRepository.findById(customerId)
+                .orElseThrow(() -> new ResourceNotFoundException("Customer not found"));
+
+        Wallet wallet = walletRepository.findByUserId(customerId)
+                .orElseThrow(() -> new ResourceNotFoundException("Wallet not found"));
+
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+
+        if (wallet.getBalance().compareTo(product.getPrice()) < 0) {
+            throw new InsufficientBalanceException("Insufficient balance");
+        }
+
+        wallet.setBalance(wallet.getBalance().subtract(product.getPrice()));
+        walletRepository.save(wallet);
+
+        PurchaseHistory purchase = new PurchaseHistory();
+        purchase.setCustomer(customer);
+        purchase.setProductName(product.getName());
+        purchase.setPriceAtPurchase(product.getPrice());
+        purchaseHistoryRepository.save(purchase);
     }
 
     public void deleteProduct(Long productId) {
