@@ -19,7 +19,7 @@ document.getElementById('customerName').textContent = localStorage.getItem('name
 function logout() {
      if (confirm('Are you sure you want to logout?')) {
         localStorage.clear();
-        window.location.href = 'login.html';
+        window.location.href = 'index.html';
     }
 }
 
